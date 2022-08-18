@@ -2,20 +2,31 @@ package com.jimas.rpc;
 
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
+ * 简易连接池
+ *
  * @author liuqj
  */
 public class ClientPool {
-    private ConcurrentHashMap<String, NioSocketChannel> socketMap;
+    private NioSocketChannel[] clients;
     private Object[] lock;
 
     public ClientPool(int poolSize) {
         if (poolSize < 1) {
             poolSize = 1;
         }
-        socketMap = new ConcurrentHashMap<>(poolSize);
+        clients = new NioSocketChannel[poolSize];
         lock = new Object[poolSize];
+        for (int i = 0; i < poolSize; i++) {
+            lock[i] = new Object();
+        }
+    }
+
+    public NioSocketChannel[] getClients() {
+        return clients;
+    }
+
+    public Object[] getLock() {
+        return lock;
     }
 }

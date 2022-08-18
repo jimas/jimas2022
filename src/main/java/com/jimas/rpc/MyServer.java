@@ -14,8 +14,11 @@ import java.net.InetSocketAddress;
  * @author liuqj
  */
 public class MyServer {
+    public static final int PORT = 9090;
+    public static final String HOST = "localhost";
+
     public static void start() throws Exception {
-        NioEventLoopGroup boss = new NioEventLoopGroup(1);
+        NioEventLoopGroup boss = new NioEventLoopGroup(10);
         NioEventLoopGroup worker = boss;
         ChannelFuture future = new ServerBootstrap()
                 .group(boss, worker)
@@ -24,10 +27,11 @@ public class MyServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
+                        pipeline.addLast(new MyChannelDecoder());
                         pipeline.addLast(new MyRpcServerHandler());
                     }
                 })
-                .bind(new InetSocketAddress(9090)).sync();
+                .bind(new InetSocketAddress(HOST, PORT)).sync();
 
         future.channel().closeFuture().sync();
     }
