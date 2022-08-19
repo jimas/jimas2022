@@ -6,9 +6,27 @@ import java.io.Serializable;
  * @author liuqj
  */
 public class MyContext implements Serializable {
+    private String name;
     private String methodName;
+    private Class<?>[] parameterTypes;
     private Object[] args;
     private String response;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Class<?>[] getParameterTypes() {
+        return parameterTypes;
+    }
+
+    public void setParameterTypes(Class<?>[] parameterTypes) {
+        this.parameterTypes = parameterTypes;
+    }
 
     public String getMethodName() {
         return methodName;

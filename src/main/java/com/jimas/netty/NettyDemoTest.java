@@ -13,6 +13,8 @@ import org.junit.Test;
 import java.net.InetSocketAddress;
 
 /**
+ * nc -l 192.168.37.128 9090 服务端
+ * nc 192.168.37.128 9090    客户端
  * @author liuqj
  */
 public class NettyDemoTest {

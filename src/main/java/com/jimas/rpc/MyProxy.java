@@ -35,11 +35,11 @@ public class MyProxy {
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                MyContext myContext = MyPackageUtil.createBody(args, method);
+                MyContext myContext = MyPackageUtil.createBody(clazz,args, method);
                 byte[] bodyBytes = MyPackageUtil.objToBytes(myContext);
                 MyHeader myHeader = MyPackageUtil.createHeader(bodyBytes);
                 byte[] headBytes = MyPackageUtil.objToBytes(myHeader);
-                NioSocketChannel client = ClientFactory.getInstance().getClient(new InetSocketAddress(MyServer.HOST, MyServer.PORT), 1);
+                NioSocketChannel client = ClientFactory.getInstance().getClient(new InetSocketAddress(MyServer.HOST, MyServer.PORT), 10);
 //                System.out.println("client:head size:" + headBytes.length);
                 CompletableFuture res = new CompletableFuture();
                 ResponseMappingCallback.addCallback(myHeader.getRequestId(), res);

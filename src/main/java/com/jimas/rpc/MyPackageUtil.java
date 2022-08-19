@@ -62,9 +62,11 @@ public class MyPackageUtil {
         return null;
     }
 
-    public static MyContext createBody(Object[] args, Method method) {
+    public static <T> MyContext createBody(Class<T> clazz, Object[] args, Method method) {
         MyContext myContext = new MyContext();
         myContext.setArgs(args);
+        myContext.setName(clazz.getName());
+        myContext.setParameterTypes(method.getParameterTypes());
         myContext.setMethodName(method.getName());
         return myContext;
     }
