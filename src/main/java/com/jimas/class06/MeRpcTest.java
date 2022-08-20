@@ -93,7 +93,7 @@ class MeCarService implements MeCar {
 class MeClientProxy {
     private static final Integer POOL_SIZE = 1;
     private static final ConcurrentHashMap<InetSocketAddress, ClientPool> clientPoolMap = new ConcurrentHashMap<>();
-    private static MeClientProxy meClientProxy;
+    private static volatile MeClientProxy meClientProxy;
     private static Random random = new Random();
 
     private MeClientProxy() {
@@ -115,6 +115,7 @@ class MeClientProxy {
         ClientPool clientPool = clientPoolMap.get(address);
         if (clientPool == null) {
             synchronized (clientPoolMap) {
+                clientPool = clientPoolMap.get(address);
                 if (clientPool == null) {
                     clientPool = new ClientPool(POOL_SIZE);
                     clientPoolMap.put(address, clientPool);
@@ -197,8 +198,8 @@ class MeProxy {
 }
 
 class MeClientPool {
-    Object[] lock;
-    NioSocketChannel[] clients;
+    volatile Object[] lock;
+    volatile NioSocketChannel[] clients;
 
     public MeClientPool(int poolSize) {
         clients = new NioSocketChannel[poolSize];

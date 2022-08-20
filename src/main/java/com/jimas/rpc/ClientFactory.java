@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ClientFactory {
     private static volatile ClientFactory clientFactory;
-    private ConcurrentHashMap<InetSocketAddress, ClientPool> poolMap = new ConcurrentHashMap<>();
+    private volatile ConcurrentHashMap<InetSocketAddress, ClientPool> poolMap = new ConcurrentHashMap<>();
     private Random rand = new Random();
 
     private ClientFactory() {
@@ -41,6 +41,7 @@ public class ClientFactory {
         ClientPool clientPool = poolMap.get(address);
         if (clientPool == null) {
             synchronized (poolMap) {
+                clientPool = poolMap.get(address);
                 if (clientPool == null) {
                     poolMap.putIfAbsent(address, new ClientPool(poolSize));
                     clientPool = poolMap.get(address);
