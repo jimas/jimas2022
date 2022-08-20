@@ -39,7 +39,7 @@ public class MyProxy {
                 byte[] bodyBytes = MyPackageUtil.objToBytes(myContext);
                 MyHeader myHeader = MyPackageUtil.createHeader(bodyBytes);
                 byte[] headBytes = MyPackageUtil.objToBytes(myHeader);
-                NioSocketChannel client = ClientFactory.getInstance().getClient(new InetSocketAddress(MyServer.HOST, MyServer.PORT), 10);
+                NioSocketChannel client = ClientFactory.getInstance().getClient(new InetSocketAddress(MyServer.HOST, MyServer.PORT), 1);
 //                System.out.println("client:head size:" + headBytes.length);
                 CompletableFuture res = new CompletableFuture();
                 ResponseMappingCallback.addCallback(myHeader.getRequestId(), res);

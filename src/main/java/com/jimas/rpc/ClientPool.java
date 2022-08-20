@@ -8,8 +8,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  * @author liuqj
  */
 public class ClientPool {
-    private NioSocketChannel[] clients;
-    private Object[] lock;
+    private volatile NioSocketChannel[] clients;
+    private volatile Object[] lock;
 
     public ClientPool(int poolSize) {
         if (poolSize < 1) {

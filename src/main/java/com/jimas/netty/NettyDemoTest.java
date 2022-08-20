@@ -15,11 +15,12 @@ import java.net.InetSocketAddress;
 /**
  * nc -l 192.168.37.128 9090 服务端
  * nc 192.168.37.128 9090    客户端
+ *
  * @author liuqj
  */
 public class NettyDemoTest {
     @Test
-    public void testClient() throws Exception {
+    public void testNettyClient() throws Exception {
         NioEventLoopGroup boss = new NioEventLoopGroup(1);
         ChannelFuture future = new Bootstrap().group(boss)
                 .channel(NioSocketChannel.class)
@@ -39,7 +40,7 @@ public class NettyDemoTest {
     }
 
     @Test
-    public void testServer() throws InterruptedException {
+    public void testNettyServer() throws InterruptedException {
         NioEventLoopGroup boss = new NioEventLoopGroup(1);
         NioEventLoopGroup worker = boss;
         ChannelFuture future = new ServerBootstrap().group(boss, worker)
@@ -55,5 +56,23 @@ public class NettyDemoTest {
                 .bind(9090).sync();
         // 等待服务器 socket 关闭 。
         future.channel().closeFuture().sync();
+    }
+
+    @Test
+    public void testServer() throws InterruptedException {
+        NioEventLoopGroup group = new NioEventLoopGroup(1);
+        NioServerSocketChannel server = new NioServerSocketChannel();
+        group.register(server);
+        ChannelFuture bind = server.bind(new InetSocketAddress(9090));
+        bind.sync().channel().closeFuture().sync();
+    }
+
+    @Test
+    public void testClient() throws InterruptedException {
+        NioEventLoopGroup group = new NioEventLoopGroup(1);
+        NioSocketChannel nioSocketChannel = new NioSocketChannel();
+        group.register(nioSocketChannel);
+        ChannelFuture connect = nioSocketChannel.connect(new InetSocketAddress("192.168.37.128", 9090));
+        connect.sync().channel().closeFuture().sync();
     }
 }
