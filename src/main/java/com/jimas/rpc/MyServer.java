@@ -59,7 +59,11 @@ public class MyServer {
                             @Override
                             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                                 System.out.println(msg.toString());
-                                String result = "netty http response";
+                                FullHttpRequest httpRequest = (FullHttpRequest) msg;
+                                byte[] resBytes = new byte[httpRequest.content().readableBytes()];
+                                httpRequest.content().readBytes(resBytes);
+                                MyContext o = (MyContext) MyPackageUtil.byteToObj(resBytes);
+                                String result = "netty http response" + o.getArgs()[0];
                                 MyContext myContext = new MyContext();
                                 myContext.setResponse(result);
                                 DefaultFullHttpResponse httpResponse = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);

@@ -24,7 +24,7 @@ public class MyMainTest {
             e.printStackTrace();
         }
     }
-
+//inet 192.168.64.135  netmask 255.255.255.0  broadcast 192.168.64.255
     @Test
     public void testServer() {
         try {
