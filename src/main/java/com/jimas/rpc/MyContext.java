@@ -10,7 +10,7 @@ public class MyContext implements Serializable {
     private String methodName;
     private Class<?>[] parameterTypes;
     private Object[] args;
-    private String response;
+    private Object response;
 
     public String getName() {
         return name;
@@ -44,11 +44,11 @@ public class MyContext implements Serializable {
         this.args = args;
     }
 
-    public String getResponse() {
+    public Object getResponse() {
         return response;
     }
 
-    public void setResponse(String response) {
+    public void setResponse(Object response) {
         this.response = response;
     }
 }

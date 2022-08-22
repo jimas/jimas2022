@@ -26,7 +26,7 @@ public class MyRpcServerHandler extends ChannelInboundHandlerAdapter {
         Object obj = dispatcher.getObj(myPackage.getMyContext().getName());
         Method method = obj.getClass().getMethod(myPackage.getMyContext().getMethodName(), myPackage.getMyContext().getParameterTypes());
         Object res = method.invoke(obj, myPackage.getMyContext().getArgs());
-        myResBody.setResponse(res.toString());
+        myResBody.setResponse(res);
         //parent.next 表示 io thread 与 execute thread 隔离，而executor 表示 当前io 与 execute 是同一个thread
         ctx.executor().parent().next().execute(() -> {
 //                ctx.executor().execute(() -> {
