@@ -1,7 +1,6 @@
 package com.jimas.class00;
 
 import org.junit.Test;
-import scala.Int;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -80,7 +79,7 @@ public class SortArrayHalfQueryTest {
      */
     @Test
     public void test004() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100000; i++) {
             int[] arr = ArrayTool.randomNoRepeat(10, 10);
             if (arr.length == 0) {
                 continue;
