@@ -8,7 +8,7 @@ import org.junit.Test;
  *
  * @author liuqj
  */
-public class RingFirstNodeTests {
+public class RingFirstNodeTest {
     @Test
     public void firstNodeTest() {
         RandomLinkedNode.Node root = RandomLinkedNode.randomRingLinkedList(4, 5, 10);
