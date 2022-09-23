@@ -107,7 +107,7 @@ public class Class08Test {
             int[] ansArr = new int[32];
             for (int j = 0; j < arr.length; j++) {
                 for (int i1 = 0; i1 < ansArr.length; i1++) {
-                    ansArr[i1] += (arr[j] & (1 << i1)) != 0 ? 1 : 0;
+                    ansArr[i1] += ((arr[j] >> i1) & 1);
                 }
             }
             int ans = 0;

@@ -12,7 +12,7 @@ import java.util.List;
  * Date: 2022/8/18
  * Time: 23:31
  *
- * @author jimas
+ * @author com.jimas
  */
 public class MyChannelDecoder extends ByteToMessageDecoder {
     @Override

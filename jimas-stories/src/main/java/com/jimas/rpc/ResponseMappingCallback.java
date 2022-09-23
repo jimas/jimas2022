@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Date: 2022/8/18
  * Time: 23:43
  *
- * @author jimas
+ * @author com.jimas
  */
 public class ResponseMappingCallback {
 

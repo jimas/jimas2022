@@ -4,7 +4,6 @@ import com.jimas.RandomTreeNode;
 import com.jimas.TreeNode;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

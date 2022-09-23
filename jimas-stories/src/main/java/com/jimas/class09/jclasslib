@@ -1,0 +1,27 @@
+ 0 new #7 <com/com.jimas/class09/ObjLayoutTest$T>
+ 3 dup
+ 4 invokespecial #8 <com/com.jimas/class09/ObjLayoutTest$T.<init> : ()V>
+ 7 astore_1
+ 8 getstatic #3 <java/lang/System.out : Ljava/io/PrintStream;>
+11 aload_1
+12 invokestatic #4 <org/openjdk/jol/info/ClassLayout.parseInstance : (Ljava/lang/Object;)Lorg/openjdk/jol/info/ClassLayout;>
+15 invokevirtual #5 <org/openjdk/jol/info/ClassLayout.toPrintable : ()Ljava/lang/String;>
+18 invokevirtual #6 <java/io/PrintStream.println : (Ljava/lang/String;)V>
+21 aload_1
+22 dup
+23 astore_2
+24 monitorenter
+25 getstatic #3 <java/lang/System.out : Ljava/io/PrintStream;>
+28 aload_1
+29 invokestatic #4 <org/openjdk/jol/info/ClassLayout.parseInstance : (Ljava/lang/Object;)Lorg/openjdk/jol/info/ClassLayout;>
+32 invokevirtual #5 <org/openjdk/jol/info/ClassLayout.toPrintable : ()Ljava/lang/String;>
+35 invokevirtual #6 <java/io/PrintStream.println : (Ljava/lang/String;)V>
+38 aload_2
+39 monitorexit
+40 goto 48 (+8)
+43 astore_3
+44 aload_2
+45 monitorexit
+46 aload_3
+47 athrow
+48 return

@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Date: 2022/8/18
  * Time: 22:06
  *
- * @author jimas
+ * @author com.jimas
  */
 public class ClientFactory {
     private static volatile ClientFactory clientFactory;

@@ -1,7 +1,7 @@
 package com.jimas.class01;
 
 /**
- * -javaagent:D:\tmp\jimas-agent.jar
+ * -javaagent:D:\tmp\com.jimas-agent.jar
  *
  * hotspot VM 中，对象在内存中的存储布局分为3部分
  * - 对象头

@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.util.Properties;
 import java.util.UUID;
-import java.util.concurrent.Future;
 
 /**
  * @author liuqj

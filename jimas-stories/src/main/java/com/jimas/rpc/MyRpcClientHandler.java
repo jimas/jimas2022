@@ -7,7 +7,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * Date: 2022/8/18
  * Time: 22:32
  *
- * @author jimas
+ * @author com.jimas
  */
 public class MyRpcClientHandler extends ChannelInboundHandlerAdapter {
 

@@ -1,0 +1,10 @@
+version: "3"
+services:
+  spring-demo:
+    build: .
+    ports:
+    - "4040:8080"
+    depends_on:
+      - redis
+  redis:
+    image: "library/redis:alpine"
