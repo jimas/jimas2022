@@ -28,6 +28,7 @@
     </dependencies>
 
     <build>
+        <finalName>spring-demo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -52,7 +53,6 @@
                 </executions>
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
-                    <finalName>spring-demo</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
