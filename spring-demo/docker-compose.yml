@@ -4,6 +4,8 @@ services:
     build: .
     ports:
     - "4040:8080"
+    volumes:
+    - ./spring-demo:/opt/logs/spring-demo
     depends_on:
       - redis
   redis:
