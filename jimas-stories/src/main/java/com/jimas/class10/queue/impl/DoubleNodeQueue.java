@@ -45,7 +45,17 @@ public class DoubleNodeQueue implements JQueue<Integer> {
         }
         int val = head.val;
         head = head.next;
+        size--;
         return val;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     @Override

@@ -28,8 +28,8 @@ public class ArrayQueue implements JQueue<Integer> {
         this.capacity = capacity;
         array = new Integer[capacity];
         this.size = 0;
-        this.inIndex = 0;
-        this.outIndex = 0;
+        this.inIndex = -1;
+        this.outIndex = -1;
     }
 
     @Override
@@ -54,20 +54,30 @@ public class ArrayQueue implements JQueue<Integer> {
 
     @Override
     public Integer peek() {
-        return array[getNextOutIndex()];
+        return array[outIndex];
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public int size() {
+        return size;
     }
 
     private int getNextInIndex() {
-        if (inIndex > capacity - 1) {
-            return 0;
+        if (inIndex >= capacity - 1) {
+            inIndex = -1;
         }
-        return inIndex++;
+        return ++inIndex;
     }
 
     private int getNextOutIndex() {
-        if (outIndex > capacity - 1) {
-            return 0;
+        if (outIndex >= capacity - 1) {
+            outIndex = -1;
         }
-        return outIndex++;
+        return ++outIndex;
     }
 }

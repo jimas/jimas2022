@@ -50,6 +50,16 @@ public class DoubleNodeStack implements JStack<Integer> {
     }
 
     @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
     public Integer peek() {
         if (tail == null) {
             return null;

@@ -45,6 +45,16 @@ public class ArrayStack implements JStack<Integer> {
     }
 
     @Override
+    public boolean isEmpty() {
+        return index < 0;
+    }
+
+    @Override
+    public int size() {
+        return index + 1;
+    }
+
+    @Override
     public Integer peek() {
         return array[index];
     }

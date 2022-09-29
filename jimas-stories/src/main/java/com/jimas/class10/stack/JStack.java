@@ -29,5 +29,18 @@ public interface JStack<E> {
      */
     E peek();
 
+    /**
+     * 是否为空
+     *
+     * @return
+     */
+    boolean isEmpty();
+
+    /**
+     * 大小
+     *
+     * @return
+     */
+    int size();
 
 }

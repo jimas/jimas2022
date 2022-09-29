@@ -1,9 +1,5 @@
 package com.jimas.class10.queue;
 
-import java.util.Collection;
-import java.util.NoSuchElementException;
-import java.util.concurrent.LinkedBlockingQueue;
-
 /**
  * 队列
  * 先进先出
@@ -32,5 +28,19 @@ public interface JQueue<E> {
      * @return
      */
     E peek();
+
+    /**
+     * 是否为空
+     *
+     * @return
+     */
+    boolean isEmpty();
+
+    /**
+     * 队列大小
+     *
+     * @return
+     */
+    int size();
 
 }
