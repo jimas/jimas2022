@@ -8,5 +8,10 @@ services:
     - ./spring-demo:/opt/logs/spring-demo
     depends_on:
       - redis
+      - hippo4j
   redis:
     image: "library/redis:alpine"
+  hippo4j:
+    image: "hippo4j/hippo4j-server"
+    ports:
+    - "6691:6691"

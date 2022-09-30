@@ -1,6 +1,16 @@
 spring:
+  application:
+    name: spring-demo
   profiles:
-    active: dev
+    active: ${spring.profile.active}
   redis:
-    host: redis
+    host: ${redis.host}
     database: 0
+    port: 6379
+  dynamic:
+    thread-pool:
+      server-addr: ${hippo4j.host}
+      username: admin
+      password: 123456
+      namespace: prescription
+      item-id: ${spring.application.name}
