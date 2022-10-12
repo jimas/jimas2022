@@ -1,0 +1,11 @@
+apollo:
+  meta: http://192.168.64.133:8080
+  bootstrap:
+    enabled: true
+    namespaces: jimas.redis,application
+app:
+  id: spring-demo
+
+spring:
+  application:
+    name: apollo-demo

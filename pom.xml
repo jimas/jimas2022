@@ -24,6 +24,7 @@
     <modules>
         <module>spring-demo</module>
         <module>jimas-stories</module>
+        <module>apollo-demo</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -79,6 +80,11 @@
                 <groupId>cn.hippo4j</groupId>
                 <artifactId>hippo4j-spring-boot-starter</artifactId>
                 <version>1.4.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client-config-data</artifactId>
+                <version>1.9.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
