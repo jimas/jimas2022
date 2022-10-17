@@ -25,6 +25,6 @@ public class LoadJobListener implements JobListener {
 
     @Override
     public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
-        System.out.println("error 处理中" + jobException.getLocalizedMessage());
+        System.out.println(" error 处理中 " + jobException.getLocalizedMessage());
     }
 }

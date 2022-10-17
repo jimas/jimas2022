@@ -15,7 +15,6 @@ import java.io.IOException;
  * @author liuqj
  */
 public class QuartzTest {
-
     @Test
     public void testExecute() {
         try {
@@ -27,11 +26,9 @@ public class QuartzTest {
             trigger.setCronExpression("*/1 * * * * ?");
             scheduler.scheduleJob(jobDetail, trigger);
             scheduler.start();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println();
         try {
             System.in.read();
         } catch (IOException e) {
