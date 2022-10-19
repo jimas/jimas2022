@@ -66,10 +66,11 @@ public class MinSumTest {
         int ans = 0;
         //帮助数组
         int[] help = new int[r - l + 1];
-        //数组数组下标
+        //帮助数组下标
         int i = 0;
-        //两个指针
+        //左组开始指针
         int lp = l;
+        //右组开始指针
         int rp = mid + 1;
         while (lp <= mid && rp <= r) {
             ans += arr[rp] > arr[lp] ? (r - rp + 1) * arr[lp] : 0;
