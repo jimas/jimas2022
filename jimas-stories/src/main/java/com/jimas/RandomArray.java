@@ -16,7 +16,7 @@ public class RandomArray {
 
     public static void printArr(int[] arr) {
         for (int i : arr) {
-            System.out.print(i + " ");
+            System.out.print(i + ",");
         }
         System.out.println();
     }
@@ -26,5 +26,15 @@ public class RandomArray {
         arr[a] = arr[b];
         arr[b] = temp;
 
+    }
+
+    /**
+     * 产生随机值
+     *
+     * @param maxVal
+     * @return
+     */
+    public static int randomNum(int maxVal) {
+        return (int) (Math.random() * maxVal);
     }
 }
