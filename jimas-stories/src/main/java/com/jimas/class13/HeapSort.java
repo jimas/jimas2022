@@ -15,7 +15,8 @@ import com.jimas.RandomArray;
  */
 public class HeapSort {
     public static void main(String[] args) {
-        for (int j = 0; j < 100; j++) {
+        for (int j = 0; j < 1; j++) {
+//            final int[] randomArr = new int[]{3,1,8,8,4,8,3,5,5};
             final int[] randomArr = RandomArray.randomArr(10, 10);
             if (randomArr.length < 1) {
                 continue;
@@ -25,8 +26,14 @@ public class HeapSort {
             for (int i = 0; i < randomArr.length; i++) {
                 heapInsert(randomArr, i);
             }
+
+            //其实在数组元素已经确认的情况下，可以只用heapify 生成大根堆
+            /*for (int length = randomArr.length; length > 0; length--) {
+                heapify(randomArr, length - 1, randomArr.length);
+            }*/
+
             RandomArray.printArr(randomArr);
-            //把第一个（最大的数）与最后一个交互位置，然后最后一个位置减一，再把余下的数排成大跟堆
+            //把第一个（最大的数）与最后一个交互位置，然后最后一个位置像左移动一位，再把余下的数排成大跟堆
             for (int i = randomArr.length - 1; i >= 0; i--) {
                 RandomArray.swap(randomArr, 0, i);
                 heapify(randomArr, 0, i);
@@ -43,12 +50,12 @@ public class HeapSort {
      * 与父亲比较，比父亲大，便交互位置
      * 类似 offer 插入数据，默认插入数组末尾
      *
-     * @param arr
-     * @param index
+     * @param arr 数组
+     * @param index 最后一个位置索引
      * @see java.util.PriorityQueue#siftUpComparable(int, Object, Object[])
      */
     public static void heapInsert(int[] arr, int index) {
-        //父节点不比自己大,如果index=0时，明显 自己不比自己大
+        //父节点不比自己大,如果index=0 时，明显 自己不比自己大
         while (arr[index] > arr[(index - 1) / 2]) {
             RandomArray.swap(arr, index, (index - 1) / 2);
             index = (index - 1) / 2;
