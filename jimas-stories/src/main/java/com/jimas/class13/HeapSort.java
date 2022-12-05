@@ -1,6 +1,9 @@
 package com.jimas.class13;
 
 import com.jimas.RandomArray;
+import scala.math.Ordering;
+
+import java.security.NoSuchAlgorithmException;
 
 /**
  * 堆排序 时间复杂度 O(logN)
@@ -14,8 +17,9 @@ import com.jimas.RandomArray;
  * @author liuqj
  */
 public class HeapSort {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         for (int j = 0; j < 1; j++) {
+
 //            final int[] randomArr = new int[]{3,1,8,8,4,8,3,5,5};
             final int[] randomArr = RandomArray.randomArr(10, 10);
             if (randomArr.length < 1) {

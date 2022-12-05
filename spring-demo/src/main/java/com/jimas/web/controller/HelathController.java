@@ -1,6 +1,7 @@
 package com.jimas.web.controller;
 
 import com.jimas.web.execute.ConcurrentExecute;
+import com.mob.library.network.http.Http;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,8 @@ public class HelathController {
     public String health() {
         Long decrement = redisTemplate.opsForValue().decrement("KEY");
         log.info("health request num: {}", decrement);
-        return "OK :" + decrement;
+        String res = Http.get("http://localhost:8080/display", String.class);
+        return res + " OK :" + decrement;
     }
 
     @RequestMapping("/display")
