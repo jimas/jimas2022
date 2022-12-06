@@ -80,12 +80,17 @@
             <dependency>
                 <groupId>cn.hippo4j</groupId>
                 <artifactId>hippo4j-spring-boot-starter</artifactId>
-                <version>1.4.1</version>
+                <version>1.4.3-upgrade</version>
             </dependency>
             <dependency>
                 <groupId>com.ctrip.framework.apollo</groupId>
                 <artifactId>apollo-client-config-data</artifactId>
                 <version>1.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hippo4j</groupId>
+                <artifactId>hippo4j-config-spring-boot-starter</artifactId>
+                <version>1.4.3-upgrade</version>
             </dependency>
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
@@ -96,6 +101,11 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>3.3.0</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.3.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

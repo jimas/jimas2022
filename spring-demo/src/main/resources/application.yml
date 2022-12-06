@@ -6,7 +6,7 @@ spring:
   redis:
     host: ${redis.host}
     database: 0
-    port: 6379
+    port: ${redis.port}
   dynamic:
     thread-pool:
       server-addr: ${hippo4j.host}

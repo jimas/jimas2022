@@ -11,6 +11,8 @@ services:
       - hippo4j
   redis:
     image: "library/redis:alpine"
+    ports:
+    - "5179:6379"
   hippo4j:
     image: "hippo4j/hippo4j-server"
     ports:
