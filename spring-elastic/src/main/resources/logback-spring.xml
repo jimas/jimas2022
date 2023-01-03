@@ -14,10 +14,10 @@
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
-        <file>/opt/logs/spring-redis/main.log</file>
+        <file>/opt/logs/spring-elastic/main.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名 -->
-            <FileNamePattern>/opt/logs/spring-redis/main.log.%d{yyyy-MM-dd}
+            <FileNamePattern>/opt/logs/spring-elastic/main.log.%d{yyyy-MM-dd}
             </FileNamePattern>
             <!--日志文件保留天数 -->
             <MaxHistory>30</MaxHistory>
@@ -33,10 +33,10 @@
             <pattern>${FILE_LOG_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
-        <file>/opt/logs/spring-redis/error.log</file>
+        <file>/opt/logs/spring-elastic/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名 -->
-            <FileNamePattern>/opt/logs/spring-redis/error.log.%d{yyyy-MM-dd}
+            <FileNamePattern>/opt/logs/spring-elastic/error.log.%d{yyyy-MM-dd}
             </FileNamePattern>
             <!--日志文件保留天数 -->
             <MaxHistory>30</MaxHistory>
