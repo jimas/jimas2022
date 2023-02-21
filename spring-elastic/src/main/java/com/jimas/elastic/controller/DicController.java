@@ -26,6 +26,8 @@ public class DicController {
         ClassPathResource classPathResource = new ClassPathResource(pathName);
         final File file = classPathResource.getFile();
         final String md5Hex = DigestUtils.md5Hex(new FileInputStream(file));
+        //region 该 http 请求需要返回两个头部(header)，一个是 Last-Modified，一个是 ETag，这两者都是字符串类型，只要有一个发生变化，插件就会去抓取新的分词进而更新词库
+        //endregion
         response.setHeader(HEAD_LAST_MODIFIED, md5Hex);
         response.setHeader(HEAD_ETAG, md5Hex);
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());

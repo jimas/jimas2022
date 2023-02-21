@@ -40,16 +40,22 @@ public class ProductController {
     @GetMapping("list")
     public Page<ProductEntity> list() {
         final PageRequest pageable = PageRequest.of(0, 10);
-
         return productRepostity.findAll(pageable);
     }
 
+    /**
+     * search after 伪代码
+     * @param pageSize
+     * @return
+     */
     @GetMapping("searchAfter")
     public Page<ProductEntity> searchAfter(@RequestParam(name = "pageSize", defaultValue = "3") int pageSize) {
         final QueryBuilder queryBuilder = QueryBuilders.boolQuery();
         List<SortBuilder<?>> sorts = new ArrayList<>();
+        // 必须要有全局唯一的排序条件 比如 _id
         sorts.add(SortBuilders.fieldSort("price").order(SortOrder.DESC));
         sorts.add(SortBuilders.fieldSort("_id").order(SortOrder.DESC));
+
         final NativeSearchQuery query = new NativeSearchQuery(queryBuilder, null, sorts);
         final List<Object> searchAfter = SearchCache.getSearchAfter(sorts);
         //`from` parameter must be set to 0 when `search_after` is used

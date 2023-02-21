@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-redis
+  profiles:
+    active: dev
+  redis:
+    cluster:
+      nodes: 172.38.0.11:6379,172.38.0.12:6379,172.38.0.13:6379,172.38.0.14:6379,172.38.0.15:6379,172.38.0.16:6379
+    database: 0
+    lettuce:
+      cluster:
+        refresh:
+          adaptive: on
+          period: 10s
