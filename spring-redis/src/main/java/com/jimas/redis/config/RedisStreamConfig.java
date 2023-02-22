@@ -26,6 +26,7 @@ public class RedisStreamConfig {
     private BaseOnStreamMq streamMq;
     @Resource
     private RedisTemplate<String, String> redisTemplate;
+    private static final String GROUP = "stream_group";
 
     @Bean
     public StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ?> streamMessageListenerContainerOptions() {
@@ -53,9 +54,9 @@ public class RedisStreamConfig {
      */
     @Bean
     public Subscription subscription(StreamMessageListenerContainer streamMessageListenerContainer) {
-        createGroup("stream_1", "group1");
+        createGroup("stream_1", GROUP);
         return streamMessageListenerContainer.receiveAutoAck(
-                Consumer.from("group1", "name1"),
+                Consumer.from(GROUP, "name1"),
                 StreamOffset.create("stream_1", ReadOffset.lastConsumed()),
                 streamMq
         );
@@ -63,11 +64,13 @@ public class RedisStreamConfig {
 
     private void createGroup(String stream, String group) {
         boolean exist = false;
-        final StreamInfo.XInfoGroups infoGroups = redisTemplate.opsForStream().groups(stream);
-        final Iterator<StreamInfo.XInfoGroup> iterator = infoGroups.iterator();
-        while (iterator.hasNext()) {
-            if (Objects.equals(iterator.next().groupName(), group)) {
-                exist = true;
+        if (redisTemplate.hasKey(stream)) {
+            final StreamInfo.XInfoGroups infoGroups = redisTemplate.opsForStream().groups(stream);
+            final Iterator<StreamInfo.XInfoGroup> iterator = infoGroups.iterator();
+            while (iterator.hasNext()) {
+                if (Objects.equals(iterator.next().groupName(), group)) {
+                    exist = true;
+                }
             }
         }
         if (!exist) {

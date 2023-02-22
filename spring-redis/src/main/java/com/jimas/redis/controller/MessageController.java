@@ -1,7 +1,8 @@
 package com.jimas.redis.controller;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.jimas.redis.mq.MsgQueue;
+import com.jimas.redis.mq.entity.Msg;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,10 +20,9 @@ public class MessageController {
 
     @RequestMapping("produce")
     public void test01() {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("UUID", UUID.randomUUID().toString());
+        final Msg msg = new Msg(UUID.randomUUID().toString());
         for (MsgQueue msgQueue : msgQueues) {
-            msgQueue.produce(msgQueue.keyPrefix() + "1", jsonObject.toString());
+            msgQueue.produce(msgQueue.keyPrefix() + "1", JSON.toJSONString(msg));
         }
 
     }

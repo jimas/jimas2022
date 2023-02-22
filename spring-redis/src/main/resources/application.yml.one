@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spring-redis
+  profiles:
+    active: dev
+  redis:
+    host: 10.89.104.143
+    database: 0
+    port: 5179
+
