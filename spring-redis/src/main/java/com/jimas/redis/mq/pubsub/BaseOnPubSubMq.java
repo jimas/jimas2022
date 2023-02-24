@@ -20,7 +20,7 @@ public class BaseOnPubSubMq extends MessageListenerAdapter implements MsgQueue {
 
     @Override
     public void produce(String topic, String msg) {
-        redisTemplate.convertAndSend(topic, msg);
+//        redisTemplate.convertAndSend(topic, msg);
     }
 
     @Override

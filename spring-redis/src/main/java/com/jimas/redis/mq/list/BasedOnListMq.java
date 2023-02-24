@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  *
  * @author liuqj
  */
-@Component
+//@Component
 public class BasedOnListMq implements MsgQueue {
     @Resource
     private RedisTemplate<String, String> redisTemplate;

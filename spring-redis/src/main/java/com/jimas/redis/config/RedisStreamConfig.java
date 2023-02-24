@@ -1,6 +1,7 @@
 package com.jimas.redis.config;
 
 import com.jimas.redis.mq.stream.BaseOnStreamMq;
+import com.jimas.redis.mq.stream.handler.RedisErrorHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -16,6 +17,9 @@ import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author liuqj
@@ -26,13 +30,19 @@ public class RedisStreamConfig {
     private BaseOnStreamMq streamMq;
     @Resource
     private RedisTemplate<String, String> redisTemplate;
-    private static final String GROUP = "stream_group";
+    @Resource
+    private RedisErrorHandler errorHandler;
+    private ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.CallerRunsPolicy());
+    public static final String GROUP = "stream_group";
 
     @Bean
     public StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ?> streamMessageListenerContainerOptions() {
         return StreamMessageListenerContainer
                 .StreamMessageListenerContainerOptions
                 .builder()
+//                .batchSize(10)
+//                .executor(executor)
+                .errorHandler(errorHandler)
                 .pollTimeout(Duration.ofSeconds(1))
                 .build();
     }
@@ -61,6 +71,7 @@ public class RedisStreamConfig {
                 streamMq
         );
     }
+
 
     private void createGroup(String stream, String group) {
         boolean exist = false;

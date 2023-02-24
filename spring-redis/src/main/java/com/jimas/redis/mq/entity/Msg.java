@@ -10,4 +10,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class Msg {
     private String val;
+    private String addr;
 }
