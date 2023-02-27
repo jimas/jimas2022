@@ -20,6 +20,7 @@ import java.util.Objects;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 
 /**
  * @author liuqj
@@ -40,8 +41,8 @@ public class RedisStreamConfig {
         return StreamMessageListenerContainer
                 .StreamMessageListenerContainerOptions
                 .builder()
-//                .batchSize(10)
-//                .executor(executor)
+                .batchSize(10)
+                .executor(executor)
                 .errorHandler(errorHandler)
                 .pollTimeout(Duration.ofSeconds(1))
                 .build();
@@ -58,18 +59,26 @@ public class RedisStreamConfig {
 
     /**
      * 订阅者1，消费组group1，收到消息后自动确认，与订阅者2为竞争关系，消息仅被其中一个消费
-     *
+     * @see org.springframework.data.redis.stream.StreamPollTask#doLoop()
      * @param streamMessageListenerContainer
      * @return
      */
     @Bean
     public Subscription subscription(StreamMessageListenerContainer streamMessageListenerContainer) {
         createGroup("stream_1", GROUP);
-        return streamMessageListenerContainer.receiveAutoAck(
-                Consumer.from(GROUP, "name1"),
-                StreamOffset.create("stream_1", ReadOffset.lastConsumed()),
-                streamMq
-        );
+        Predicate<Throwable> predicate = t -> false;
+        StreamMessageListenerContainer.ConsumerStreamReadRequest<String> streamReadRequest = StreamMessageListenerContainer.StreamReadRequest
+                .builder(StreamOffset.create("stream_1", ReadOffset.lastConsumed()))
+                .consumer(Consumer.from(GROUP, "name1"))
+                .autoAcknowledge(true)
+                .cancelOnError(predicate)
+                .build();
+        return streamMessageListenerContainer.register(streamReadRequest, streamMq);
+//        return streamMessageListenerContainer.receiveAutoAck(
+//                Consumer.from(GROUP, "name1"),
+//                StreamOffset.create("stream_1", ReadOffset.lastConsumed()),
+//                streamMq
+//        );
     }
 
 

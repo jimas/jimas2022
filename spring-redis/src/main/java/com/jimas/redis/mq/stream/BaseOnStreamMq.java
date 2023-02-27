@@ -75,9 +75,9 @@ public class BaseOnStreamMq implements MsgQueue, StreamListener<String, Record<S
             String payload = message.getValue().get(MESSAGE_KEY);
             final Msg msg = JSON.parseObject(payload, Msg.class);
             log.info(msg.getAddr());
-        } catch (Exception e) {
-            log.error("onMessage fail", e);
-        } finally {
+            String s = null;
+            s.length();
+        }  finally {
             redisTemplate.opsForStream().delete(message);
             log.info("count[{}]", count.get());
         }
