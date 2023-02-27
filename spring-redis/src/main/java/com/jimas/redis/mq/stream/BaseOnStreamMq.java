@@ -63,6 +63,7 @@ public class BaseOnStreamMq implements MsgQueue, StreamListener<String, Record<S
     /**
      * 必须要正确处理消息
      * 及时 ack
+     *
      * @param message
      */
     @Override
@@ -75,9 +76,9 @@ public class BaseOnStreamMq implements MsgQueue, StreamListener<String, Record<S
             String payload = message.getValue().get(MESSAGE_KEY);
             final Msg msg = JSON.parseObject(payload, Msg.class);
             log.info(msg.getAddr());
-            String s = null;
-            s.length();
-        }  finally {
+        } catch (Exception e) {
+            log.error("onMessage fail", e);
+        } finally {
             redisTemplate.opsForStream().delete(message);
             log.info("count[{}]", count.get());
         }
