@@ -1,7 +1,6 @@
 package com.jimas.redis.config;
 
 import com.jimas.redis.mq.stream.BaseOnStreamMq;
-import com.jimas.redis.mq.stream.handler.RedisErrorHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -17,9 +16,6 @@ import javax.annotation.Resource;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 /**
@@ -31,9 +27,6 @@ public class RedisStreamConfig {
     private BaseOnStreamMq streamMq;
     @Resource
     private RedisTemplate<String, String> redisTemplate;
-    @Resource
-    private RedisErrorHandler errorHandler;
-    private ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 100, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.CallerRunsPolicy());
     public static final String GROUP = "stream_group";
 
     @Bean
@@ -42,8 +35,9 @@ public class RedisStreamConfig {
                 .StreamMessageListenerContainerOptions
                 .builder()
                 .batchSize(10)
-                .executor(executor)
-                .errorHandler(errorHandler)
+                .errorHandler(t -> {
+                    t.printStackTrace();
+                })
                 .pollTimeout(Duration.ofSeconds(1))
                 .build();
     }
@@ -59,9 +53,10 @@ public class RedisStreamConfig {
 
     /**
      * 订阅者1，消费组group1，收到消息后自动确认，与订阅者2为竞争关系，消息仅被其中一个消费
-     * @see org.springframework.data.redis.stream.StreamPollTask#doLoop()
+     *
      * @param streamMessageListenerContainer
      * @return
+     * @see org.springframework.data.redis.stream.StreamPollTask#doLoop()
      */
     @Bean
     public Subscription subscription(StreamMessageListenerContainer streamMessageListenerContainer) {
