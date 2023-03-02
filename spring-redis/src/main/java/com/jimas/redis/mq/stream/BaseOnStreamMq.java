@@ -61,9 +61,9 @@ public class BaseOnStreamMq implements MsgQueue, StreamListener<String, Record<S
     }
 
     /**
-     * 必须要正确处理消息
-     * 及时 ack
-     *
+     * 消息必须正确处理，自动 ack
+     * 不能抛出异常，否则会导致消费者被移除 那是因为抛出异常是 默认 当前长轮询现场 被取消
+     * @see org.springframework.data.redis.stream.StreamPollTask#doLoop()
      * @param message
      */
     @Override

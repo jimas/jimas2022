@@ -19,7 +19,13 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
- * @author liuqj
+ * Date: 2022/5/11
+ * Time: 21:52
+ * redis 的 stream 实现消息队列
+ * <p>要求redis版本5.0以上，并且 spring-data-redis jedis版本并没有实现stream</p>
+ *
+ * @author jimas
+ * @since redis 5.0+
  */
 @Configuration
 public class RedisStreamConfig {
@@ -29,15 +35,22 @@ public class RedisStreamConfig {
     private RedisTemplate<String, String> redisTemplate;
     public static final String GROUP = "stream_group";
 
+    /**
+     * xreadgroup group stream_group namess block 10 count 10 streams stream_1 >
+     * @return
+     */
     @Bean
     public StreamMessageListenerContainer.StreamMessageListenerContainerOptions<String, ?> streamMessageListenerContainerOptions() {
         return StreamMessageListenerContainer
                 .StreamMessageListenerContainerOptions
                 .builder()
+                //batchSize 对应xreadgroup 中的 count，标识一次最多读10条
                 .batchSize(10)
+                //.executor() 慎用 外部线程池  防止 消费者饥饿（因为普通的外部线程池都有队列，多余的任务会扔进队列，导致队列中的消费者 得不到执行，因为StreamPollTask 为长轮询，不会消亡，一直占用线程）
                 .errorHandler(t -> {
                     t.printStackTrace();
                 })
+                // 对应 对应xreadgroup 中的 block
                 .pollTimeout(Duration.ofSeconds(1))
                 .build();
     }
@@ -66,6 +79,7 @@ public class RedisStreamConfig {
                 .builder(StreamOffset.create("stream_1", ReadOffset.lastConsumed()))
                 .consumer(Consumer.from(GROUP, "name1"))
                 .autoAcknowledge(true)
+                //出现异常 是否取消,不取消
                 .cancelOnError(predicate)
                 .build();
         return streamMessageListenerContainer.register(streamReadRequest, streamMq);
