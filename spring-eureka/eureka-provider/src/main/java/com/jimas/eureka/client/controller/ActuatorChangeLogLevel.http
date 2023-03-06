@@ -1,0 +1,13 @@
+### 获取loggers 配置
+GET http://localhost:8000/actuator/loggers
+
+
+### 动态调整日志级别
+POST http://localhost:8000/actuator/loggers/com.jimas.eureka.client.controller.OrderController
+Content-Type: application/json
+
+{
+  "configuredLevel": "debug"
+}
+
+###

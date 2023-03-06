@@ -1,0 +1,13 @@
+### 获取loggers 配置
+GET http://localhost:9000/actu/ator/loggers
+
+
+### 动态调整日志级别
+POST http://localhost:9000/actu/ator/loggers/com.jimas.eureka.consumer.controller.ConsumerOrderController
+Content-Type: application/json
+
+{
+  "configuredLevel": "debug"
+}
+
+###

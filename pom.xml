@@ -20,6 +20,7 @@
 <!--        <spring-boot.version>2.3.11.RELEASE</spring-boot.version>-->
         <spring-boot.version>2.7.7</spring-boot.version>
 
+
     </properties>
     <modules>
         <module>spring-demo</module>
@@ -28,6 +29,7 @@
         <module>spring-redis</module>
         <module>spring-elastic</module>
         <module>transaction</module>
+        <module>spring-eureka</module>
     </modules>
     <dependencyManagement>
         <dependencies>

@@ -1,0 +1,22 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #loggers
+server:
+  port: 8000
+spring:
+  application:
+    name: eureka-provider
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka
+  instance:
+    instance-id: eureka-provider-01
+    prefer-ip-address: true #显示访问路径的ip地址
+info:
+  app.name: eureka-provider-01
+  company.name: jimas.cn
+  build.aetifactId: @project.artifactId@
+  build.version: @project.version@
