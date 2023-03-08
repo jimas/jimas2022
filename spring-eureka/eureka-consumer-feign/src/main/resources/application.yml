@@ -1,0 +1,33 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: loggers  # 安全考虑，避免 "*"
+      base-path: /actu/ator  #默认 actuator 比如： http://localhost:9000/actu/ator/loggers
+server:
+  port: 9001
+spring:
+  application:
+    name: eureka-consumer-feign
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka
+  instance:
+    instance-id: eureka-consumer-feign
+    prefer-ip-address: true #显示访问路径的ip地址
+info:
+  app.name: eureka-consumer-feign
+  company.name: jimas.cn
+  build.aetifactId: @project.artifactId@
+  build.version: @project.version@
+
+ribbon:
+  eureka:
+    enabled: true
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true

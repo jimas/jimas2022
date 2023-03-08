@@ -1,6 +1,7 @@
 package com.jimas.eureka.client.service;
 
-import com.jimas.eureka.client.dto.OrderDTO;
+
+import com.jimas.common.entity.OrderDTO;
 
 /**
  * @author liuqj

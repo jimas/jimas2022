@@ -1,7 +1,7 @@
-package com.jimas.eureka.client.dto;
+package com.jimas.common.entity;
 
 import lombok.Data;
-import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.RandomUtils;
 
 /**
  * @author liuqj
