@@ -30,6 +30,7 @@
         <module>spring-elastic</module>
         <module>transaction</module>
         <module>spring-eureka</module>
+        <module>log-parent</module>
     </modules>
     <dependencyManagement>
         <dependencies>
