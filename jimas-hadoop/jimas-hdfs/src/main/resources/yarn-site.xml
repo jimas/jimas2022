@@ -46,5 +46,15 @@
         <name>yarn.resourcemanager.hostname.rm2</name>
         <value>node05</value>
     </property>
+    <property>
+        <name>yarn.log-aggregation-enable</name>
+        <value>true</value>
+        <description>开启日志聚合功能，任务执行完成后，将日志上传到hdfs，如没开启，打开报Aggregation is not enabled. Try the nodemanage</description>
+    </property>
+    <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>302400</value>
+        <description>日志存放文件系统的最长时间，默认-1，即永久有效</description>
+    </property>
 
 </configuration>

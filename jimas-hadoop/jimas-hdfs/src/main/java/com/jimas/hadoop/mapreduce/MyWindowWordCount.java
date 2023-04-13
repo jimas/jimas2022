@@ -39,6 +39,7 @@ public class MyWindowWordCount {
             outPath.getFileSystem(conf).delete(outPath, true);
         }
         TextInputFormat.addInputPath(job, inPath);
+        //outPath 必须保证之前不存在 org.apache.hadoop.mapreduce.lib.output.FileOutputFormat.checkOutputSpecs
         TextOutputFormat.setOutputPath(job, outPath);
         job.waitForCompletion(true);
 
