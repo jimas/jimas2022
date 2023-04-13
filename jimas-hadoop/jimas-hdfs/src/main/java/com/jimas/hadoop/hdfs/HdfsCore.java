@@ -21,8 +21,8 @@ public class HdfsCore {
     @Before
     public void conn() throws Exception {
         conf = new Configuration(true);
-        //环境变量 HADOOP_USER_NAME
-//        fs = FileSystem.get(conf);
+        //FileSystem.get(conf) 依赖环境变量 HADOOP_USER_NAME hadoop 需要重启电脑
+        //fs = FileSystem.get(conf);
         fs = FileSystem.get(URI.create("hdfs://mycluster/"), conf, "hadoop");
     }
 
