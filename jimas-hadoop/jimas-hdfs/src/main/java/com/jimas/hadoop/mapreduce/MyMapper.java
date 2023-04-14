@@ -2,13 +2,16 @@ package com.jimas.hadoop.mapreduce;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.JobConf;
+import org.apache.hadoop.mapred.MapTask;
+import org.apache.hadoop.mapred.TaskUmbilicalProtocol;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 import java.util.StringTokenizer;
 
 /**
- *
+ * @see MapTask#run(JobConf, TaskUmbilicalProtocol)
  * @author liuqj
  */
 public class MyMapper extends Mapper<Object, Text, Text, IntWritable> {
@@ -20,7 +23,7 @@ public class MyMapper extends Mapper<Object, Text, Text, IntWritable> {
 
     @Override
     protected void map(Object key, Text value, Context context) throws IOException, InterruptedException {
-        System.out.println(value);
+//        System.out.println(value);
         StringTokenizer it = new StringTokenizer(value.toString());
         while (it.hasMoreTokens()) {
             word.set(it.nextToken());

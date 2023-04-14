@@ -2,11 +2,13 @@ package com.jimas.hadoop.mapreduce;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.ReduceTask;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
 /**
+ * @see ReduceTask#run(org.apache.hadoop.mapred.JobConf, org.apache.hadoop.mapred.TaskUmbilicalProtocol)
  * @author liuqj
  */
 public class MyReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
@@ -22,8 +24,8 @@ public class MyReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
 
     @Override
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
-        System.out.println(key);
-        System.out.println(values);
+//        System.out.println(key);
+//        System.out.println(values);
         int sum = 0;
         for (IntWritable val : values) {
             sum += val.get();
