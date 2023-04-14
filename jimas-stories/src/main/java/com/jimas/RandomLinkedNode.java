@@ -51,6 +51,47 @@ public class RandomLinkedNode {
         return getLastNode(node.next);
     }
 
+    public static int linkLength(Node head) {
+        int length = 0;
+        Node next = head;
+        while (next != null) {
+            length++;
+            next = next.next;
+        }
+        return length;
+    }
+
+    /**
+     * 下中点
+     *
+     * @param head
+     * @return
+     */
+    public static Node middleDownNode(Node head) {
+        Node fast = head;
+        Node slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    /**
+     * 上中点
+     *
+     * @param head
+     * @return
+     */
+    public static Node middleUpNode(Node head) {
+        Node fast = head;
+        Node slow = head;
+        while (fast != null && fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
     public static class Node {
         private int val;
         private Node next;
@@ -62,6 +103,14 @@ public class RandomLinkedNode {
         public Node(int val, Node next) {
             this.val = val;
             this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "val=" + val +
+                    ", next=" + next +
+                    '}';
         }
 
         public int getVal() {
