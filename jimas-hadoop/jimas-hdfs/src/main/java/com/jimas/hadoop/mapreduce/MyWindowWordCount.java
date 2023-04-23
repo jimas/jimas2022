@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 /**
- * 需要 package 打出jar
+ * 需要 package 打出jar,也是提交给yarn
  * windows 环境下 需要装 hadoop 环境
  * 编辑 Configuration 添加 program arguments 如下：
  *  -Dmapreduce.job.reduces=2  /user/hadoop/data.txt  /data/windows/result

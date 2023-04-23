@@ -9,6 +9,8 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 /**
+ * /data/topn/input/data.txt /data/topn/output
+ *
  * @author liuqj
  */
 public class MyTopNClient {
@@ -16,15 +18,16 @@ public class MyTopNClient {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration(true);
         //不提交到yarn  指定本地
-        conf.set("mapreduce.framework.name","local");
+        conf.set("mapreduce.framework.name", "local");
         //异构平台执行 windows
-        conf.set("mapreduce.app-submission.cross-platform","true");
+        conf.set("mapreduce.app-submission.cross-platform", "true");
 
         //params
         GenericOptionsParser parser = new GenericOptionsParser(conf, args);
         String[] others = parser.getRemainingArgs();
         //job info
         Job job = Job.getInstance(conf);
+        job.addCacheFile(new Path("/data/dict/dict.txt").toUri());
         job.setJarByClass(MyTopNClient.class);
         job.setJobName("myTopN");
         //region map 阶段

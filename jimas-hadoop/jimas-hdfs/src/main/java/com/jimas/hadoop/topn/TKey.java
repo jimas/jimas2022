@@ -14,6 +14,7 @@ public class TKey implements WritableComparable<TKey> {
     private int month;
     private int day;
     private int wd;
+    private String location;
 
     public int getYear() {
         return year;
@@ -47,12 +48,21 @@ public class TKey implements WritableComparable<TKey> {
         this.wd = wd;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     @Override
     public void write(DataOutput out) throws IOException {
         out.writeInt(year);
         out.writeInt(month);
         out.writeInt(day);
         out.writeInt(wd);
+        out.writeUTF(location);
     }
 
     @Override
@@ -61,6 +71,7 @@ public class TKey implements WritableComparable<TKey> {
         this.month = in.readInt();
         this.day = in.readInt();
         this.wd = in.readInt();
+        this.location = in.readUTF();
     }
 
 

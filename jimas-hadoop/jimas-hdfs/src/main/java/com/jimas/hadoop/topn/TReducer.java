@@ -25,7 +25,7 @@ public class TReducer extends Reducer<TKey, IntWritable, Text, IntWritable> {
         while (iterator.hasNext()) {
             //next 会对 key value 都会更新，底层调用的 nextKeyValue
             IntWritable next = iterator.next();
-            String currentKey = key.getYear() + "-" + key.getMonth() + "-" + key.getDay();
+            String currentKey = key.getYear() + "-" + key.getMonth() + "-" + key.getDay() + "@" + key.getLocation();
             if (first) {
                 first = false;
                 firstKey = currentKey;
