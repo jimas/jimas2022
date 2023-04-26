@@ -92,6 +92,7 @@ public class RandomLinkedNode {
         }
         return slow;
     }
+
     public static class Node {
         private int val;
         private Node next;
@@ -132,4 +133,32 @@ public class RandomLinkedNode {
     }
 
 
+    public static class RandNode extends Node {
+        private Node rand;
+
+        public Node getRand() {
+            return rand;
+        }
+
+        public void setRand(Node rand) {
+            this.rand = rand;
+        }
+
+        public RandNode(int val) {
+            super(val);
+        }
+
+        public RandNode(int val, Node next, Node rand) {
+            super(val, next);
+            this.rand = rand;
+        }
+
+        @Override
+        public String toString() {
+            return "RandNode{" +
+                    "val=" + super.getVal() +
+                    ", next=" + super.next +
+                    '}';
+        }
+    }
 }
