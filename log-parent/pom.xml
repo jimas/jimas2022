@@ -11,6 +11,7 @@
 
     <artifactId>log-parent</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>log-analyse</module>
     </modules>
