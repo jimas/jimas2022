@@ -1,0 +1,11 @@
+syntax = "proto3";
+package com.jimas.hbase;
+
+option java_package = "com.jimas.hbase";
+option java_outer_classname = "Phone";
+message Request{
+  string dest = 1;
+  string length = 2;
+  string type = 3;
+  string callTime = 4;
+}
