@@ -23,7 +23,7 @@ import java.util.List;
  * <br>时长：duration:</br>
  * <br>类型:type</br>
  * <br>通话开始时间:callTime</br>
- *
+ * <br>通过 protobuf 可以有效降低磁盘空间（25M->9M） 大概三倍</br>
  * @author liuqj
  */
 public class HbaseProtobuf {
@@ -34,7 +34,7 @@ public class HbaseProtobuf {
     @Before
     public void init() throws Exception {
         Configuration configuration = HBaseConfiguration.create();
-        configuration.set("hbase.zookeeper.quorum", "node03:2181,node04:2181,node05:2181");
+        configuration.set("hbase.zookeeper.quorum", "node01:2181,node02:2181,node03:2181");
         connection = ConnectionFactory.createConnection(configuration);
         admin = connection.getAdmin();
         table = connection.getTable(TableName.valueOf("phone_buf"));
