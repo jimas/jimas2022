@@ -8,7 +8,7 @@ import cz.mallat.uasparser.UASparser;
 /**
  * 解析浏览器的user agent的工具类，内部就是调用这个uasparser jar文件
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public class UserAgentUtil {

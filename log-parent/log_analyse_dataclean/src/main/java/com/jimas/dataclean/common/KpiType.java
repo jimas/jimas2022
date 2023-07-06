@@ -3,7 +3,7 @@ package com.jimas.dataclean.common;
 /**
  * 统计kpi的名称枚举类
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public enum KpiType {

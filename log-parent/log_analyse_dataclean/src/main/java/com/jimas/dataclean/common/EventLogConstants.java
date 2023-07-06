@@ -5,7 +5,7 @@ package com.jimas.dataclean.common;
  * 以及event_logs这张hbase表的结构信息<br/>
  * 用户数据参数的name名称就是event_logs的列名
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public class EventLogConstants {

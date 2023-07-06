@@ -3,7 +3,7 @@ package com.jimas.dataclean.common;
 /**
  * 全局常量类
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public class GlobalConstants {

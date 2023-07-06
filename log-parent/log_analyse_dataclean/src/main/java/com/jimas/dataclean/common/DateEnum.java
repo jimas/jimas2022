@@ -3,7 +3,7 @@ package com.jimas.dataclean.common;
 /**
  * 日期类型枚举类
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public enum DateEnum {

@@ -1,10 +1,8 @@
 package com.jimas.dataclean.etl.mr.ald;
 
-import java.io.IOException;
-
-import com.mashibing.common.EventLogConstants;
-import com.mashibing.common.GlobalConstants;
-import com.mashibing.util.TimeUtil;
+import com.jimas.dataclean.common.EventLogConstants;
+import com.jimas.dataclean.common.GlobalConstants;
+import com.jimas.dataclean.util.TimeUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -19,11 +17,13 @@ import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
+
 
 /**
  * 编写mapreduce的runner类
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public class AnalyserLogDataRunner implements Tool {
@@ -42,7 +42,7 @@ public class AnalyserLogDataRunner implements Tool {
 
 	@Override
 	public void setConf(Configuration conf) {
-		conf.set("hbase.zookeeper.quorum","node04,node02,node03");
+		conf.set("hbase.zookeeper.quorum","node01,node02,node03");
 		conf.set("mapreduce.app-submission.cross-platform","true");
 		conf.set("mapreduce.framework.name","local");
 		this.conf = HBaseConfiguration.create(conf);

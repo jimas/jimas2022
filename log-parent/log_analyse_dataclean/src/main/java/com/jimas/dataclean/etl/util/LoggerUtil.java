@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * 处理日志数据的具体工作类
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public class LoggerUtil {

@@ -38,7 +38,7 @@ public class HbaseFilter {
     @Before
     public void init() throws Exception {
         Configuration configuration = HBaseConfiguration.create();
-        configuration.set("hbase.zookeeper.quorum", "node03:2181,node04:2181,node05:2181");
+        configuration.set("hbase.zookeeper.quorum", "node01:2181,node02:2181,node03:2181");
         connection = ConnectionFactory.createConnection(configuration);
         admin = connection.getAdmin();
         table = connection.getTable(TableName.valueOf("phone"));

@@ -21,7 +21,7 @@ import javax.naming.Context;
 /**
  * 自定义数据解析map类
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public class AnalyserLogDataMapper extends Mapper<LongWritable, Text, NullWritable, Put> {

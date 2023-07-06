@@ -6,12 +6,12 @@ import java.sql.SQLException;
 
 import org.apache.hadoop.conf.Configuration;
 
-import com.mashibing.common.GlobalConstants;
+import com.jimas.dataclean.common.GlobalConstants;
 
 /**
  * jdbc管理
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public class JdbcManager {

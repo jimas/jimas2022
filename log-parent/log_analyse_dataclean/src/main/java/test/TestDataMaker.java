@@ -33,7 +33,7 @@ public class TestDataMaker {
 		Random r = new Random();
 		
 		Configuration conf = new Configuration();
-		conf.set("hbase.zookeeper.quorum", "node04");
+		conf.set("hbase.zookeeper.quorum", "node03");
 		Connection connection = ConnectionFactory.createConnection(conf);
 		Admin admin = connection.getAdmin();
 		Table hTable = connection.getTable(TableName.valueOf(TN));

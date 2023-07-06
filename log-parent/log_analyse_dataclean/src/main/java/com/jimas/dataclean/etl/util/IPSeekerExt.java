@@ -9,7 +9,7 @@ import com.jimas.dataclean.etl.util.ip.IPSeeker;
  * 如果是国外的ip，那么直接设置为unknown unknown unknown<br/>
  * 如果是国内ip，如果没法进行解析，那么就设置为中国 unknown unknown<br/>
  * 
- * @author 马士兵教育
+ * @author jimas
  *
  */
 public class IPSeekerExt extends IPSeeker {
