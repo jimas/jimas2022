@@ -7,6 +7,7 @@ public class PrintInt32Char {
 
     public static void main(String[] args) {
         int num = 100;
+        print32(num);
         print32((-1 << 29));
         print32((0 << 29));
         print32((1 << 29));

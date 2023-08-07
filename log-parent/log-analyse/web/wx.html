@@ -1,0 +1,113 @@
+<html>
+<head>
+  <title>领取88优惠卷</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="description" content="" />
+  <link rel="icon" href="data:,">
+  <link rel="shortcut icon" href="data:,"/>
+  <link rel="stylesheet" type="text/css" href="//res.wx.qq.com/open/libs/weui/2.4.0/weui.min.css?v=2023070601">
+  <link rel="stylesheet" type="text/css" href="//file.wailian1.cn/wl/css/links-home.min.css?v=2023070601">
+  <script src="//file.wailian1.cn/assets/js/v2/jquery-3.5.1-min.js?v=2023070601"></script>
+  <script src="//file.wailian1.cn/assets/js/libs/cryptojs/md5.js?v=2023070601"></script>
+  <script src="//file.wailian1.cn/assets/js/libs/cryptojs/aes.js?v=2023070601"></script>
+  <script src="//file.wailian1.cn/assets/js/v2/qrcode.min.js?v=2023070601"></script>
+  <script src="//file.wailian1.cn/assets/js/v2/clipboard.min.js?v=2023070601"></script>
+  <script src="//file.wailian1.cn/wl/js/wailian.static.min.js?v=2023070601"></script>
+  <script src="//file.wailian1.cn/wl/js/wailian.common.min.js?v=2023070601"></script>
+</head>
+
+<body>
+<input type="hidden" id="linksinfo" value="qgUcwCsJgutOI7s97J6O0e/SKC3paQR0eBOq+fEQkT4llD2U5F3YFyJ/v3eqiJa8SK9f2b31LrC/AL1h/G/Da9ibW2gia5BMgUroFKOTzSjJvQZOXvEKtRs+P44qX9zlNejNdepCq8PnDYOk94wKkgwf8E5z6xFKLt6e1iMJ3blFIPM7yWYOI829s0pLEyGg2gEfjreaZlJU6PIo9hBeUKCbVlMtluusslukrWsKkiMXXiLx7gNtHbp1wABUu6JzBd7ZJudP+3nhJNM0NBn6Hpc1Mkom54IkO03yLiXhd6e1Nc+dW2l59mWf6X9Wl6/nLRu6VkvyaraEFiJbQcAqaGZgCTPrn0hMn7gNjN+OWnXnQx2xKuLr7Y1eAC5BPUrRKrYTDjcJIauXWqaI8ks6e6psdbkj5yashSYjS6rnf+CYl9/o3/3OMFvSWtT6h07RaEk4fzbuK3SMvUPCmqwc1BSYtg0z8HIv7koA825XGkHeHgZIRn6FTslCXZF/jc4d2K9KAi0EuefH/jorWFLKd2ut2qIaj4MR+ITMGstn7qY2lxk0R+Do1gzoLjO/ePRqUc/knr7ES9Y3z1glyiV8eo6Heyg3kWLFOljgaNe6jcRP4Xyi6c/b971LQ5DgZxikOZWx7Xf4fEct5cxMnqhVEWdXEDBIYCJkBPUNVmFkGCvJvIuWXuiVYY9rPnS1UBMv6wK2EzXWfqtIuMMmet8iAeHKcFzdONbmurteKcQcOZON4p5sqr/r0vOiImmhq3/oxeXCvj3FC14gVg+N3+vpRYgkCGIZFpZ9pA0lfDfWBpdeMY+p+JlUjVcj5sI0PCsb">
+<div class="page full" id="main_content">
+  <div id="public-web-container" class="public-container">
+    <div id="safe-notice" style="display:none;">
+      <div class="safe-notice">
+        <i class="weui-icon-safe-success"></i>
+        <p>本链接经过<font>SSL安全加密</font>,请放心点击!</p>
+      </div>
+    </div>
+    <div id="style_normal" style="display:none;">
+      <img class="logo" src="">
+      <p class="notice-msg"><small>正在跳转到微信...</small><br>如未自动打开微信请点击下方按钮</p>
+      <div class="button-container">
+        <a id="public-web-jump-button" href="" class="default" style="">
+                        <span id="public-web-jump-button-loading" class="weui-primary-loading weui-primary-loading_transparent">
+                            <i class="weui-primary-loading__dot"></i>
+                        </span>
+          正在打开微信
+        </a>
+      </div>
+      <a id="dianjiimg_links" href="">
+      </a>
+      <div class="qrcodes-container" id="qrcodes"></div>
+      <p class="copy-notice"><font></font><span id="copylink" data-clipboard-text="">复制链接</span></p>
+    </div>
+    <div id="style_full" style="display:none;">
+      <a id="dianjiimg_links_full" href="">
+        <img class="fullimg" src="">
+      </a>
+      <div id="button_container_full" class="button-container-none">
+        <a id="public-web-jump-button-full" href="" style="">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page" id="noticeError" style="display:none;">
+  <div class="weui-msg">
+    <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+    <div class="weui-msg__text-area">
+      <h2 class="weui-msg__title">请在微信内打开</h2>
+      <p class="weui-msg__desc"></p>
+    </div>
+    <div class="weui-msg__tips-area">
+      <p class="weui-msg__tips" style="font-size:14px;">如果链接无法打开微信并展示公众号，请复制链接使用手机微信打开。</p>
+    </div>
+    <div class="weui-msg__opr-area">
+      <p class="weui-btn-area">
+        <span id="errorcopylink" data-clipboard-text="" class="weui-btn weui-btn_primary">复制链接</span>
+      </p>
+    </div>
+    <div class="weui-msg__extra-area">
+      <div class="weui-footer">
+        <p class="weui-footer__text">Copyright &copy; 2018-2022 <a href="https://nilife.cn" style="color: var(--weui-FG-2);">nilife.cn</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--BEGIN dialog-->
+<div class="js_dialog" role="dialog"  aria-hidden="true" aria-modal="true" aria-labelledby="js_title2" id="dialog" style="display: none;">
+  <div class="weui-mask"></div>
+  <div class="weui-dialog">
+    <div class="weui-dialog__bd">已复制，将链接发送给微信 "文件传输助手" 后即可点击打开！</div>
+    <div class="weui-dialog__ft">
+      <span class="weui-dialog__btn weui-dialog__btn_primary" onclick="hideDialog();">知道了</span>
+    </div>
+  </div>
+</div>
+<div id="debug"></div>
+<!--END dialog-->
+<script type="text/javascript">
+  $(document).ready(function() {
+    try {
+      getLinksDetial();
+    } catch(error){
+      $("#debug").text(error);
+      errorReport(error)
+    }
+    var copylink = new ClipboardJS("#copylink");
+    alert(copylink)
+    copylink.on('success', function(e) {
+      showDialog();
+    });
+    var copylink = new ClipboardJS("#errorcopylink");
+    copylink.on('success', function(e) {
+      showDialog();
+    });
+  });
+</script>
+</body>
+
+</html>
