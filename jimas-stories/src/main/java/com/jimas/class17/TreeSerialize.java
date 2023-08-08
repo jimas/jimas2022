@@ -21,7 +21,7 @@ import java.util.Queue;
  * @author liuqj
  */
 public class TreeSerialize {
-    static class TreeNode {
+    private static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;

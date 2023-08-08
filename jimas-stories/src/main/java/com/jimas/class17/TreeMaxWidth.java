@@ -9,7 +9,7 @@ import java.util.Queue;
  * @author liuqj
  */
 public class TreeMaxWidth {
-    static class Node {
+    private static class Node {
         int val;
         Node left;
         Node right;

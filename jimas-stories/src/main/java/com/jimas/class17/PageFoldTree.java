@@ -14,7 +14,7 @@ package com.jimas.class17;
  * @author liuqj
  */
 public class PageFoldTree {
-    static class Node {
+    private static class Node {
         String val;
         Node left;
         Node right;

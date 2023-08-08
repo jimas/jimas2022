@@ -14,7 +14,7 @@ package com.jimas.class17;
  */
 public class SucceedNodeTree {
 
-    static class Node {
+    private static class Node {
         int val;
         Node left;
         Node right;

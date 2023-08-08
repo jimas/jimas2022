@@ -7,7 +7,7 @@ import java.util.Stack;
  * @author liuqj
  */
 public class Tree01 {
-    static class Node {
+    private static class Node {
         String value;
         Node left;
         Node right;

@@ -10,7 +10,7 @@ import java.util.Queue;
  */
 public class TreeLevelPrint {
 
-    static class Node {
+    private static class Node {
         int val;
         Node left;
         Node right;
