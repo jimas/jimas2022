@@ -1,57 +1,81 @@
 package com.jimas.class17;
 
 /**
- * 平衡二叉树：
- *  平衡二叉树也叫 AVL 树。平衡二叉树是具有以下特点的二叉查找树:
- *  它是一棵空树或它的左右两个子树的高度差的绝对值不超过 1,并且左右两个子树都是一棵平衡二叉树
+ * Binary Search Tree
+ * (二叉搜索树，二叉排序树）它或者是一棵空树，或者是具有下列性质的二叉树：
+ * 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；
+ * 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值
+ *
  * @author liuqj
  */
 public class BST {
+
     public static void main(String[] args) {
-        PrintBinaryTree.Node head = generateNodeTree(4);
-        System.out.println(process(head).isBalance);
-        PrintBinaryTree.printTree(head);
+        PrintBinaryTree.Node node = new PrintBinaryTree.Node(10);
+        node.left = new PrintBinaryTree.Node(5);
+        node.left.left = new PrintBinaryTree.Node(4);
+        node.left.right = new PrintBinaryTree.Node(6);
+
+        node.right = new PrintBinaryTree.Node(14);
+        node.right.left = new PrintBinaryTree.Node(12);
+        node.right.right = new PrintBinaryTree.Node(15);
+        System.out.println(isBst(node));
     }
 
-    private static class Info {
-        int height;
-        boolean isBalance;
-
-        public Info(int height, boolean isBalance) {
-            this.height = height;
-            this.isBalance = isBalance;
-        }
-    }
-
-    private static Info process(PrintBinaryTree.Node head) {
+    private static boolean isBst(PrintBinaryTree.Node head) {
         if (head == null) {
-            return new Info(0, true);
+            return true;
         }
-        Info leftInfo = process(head.left);
-        Info rightInfo = process(head.right);
-        boolean isBalance = false;
-        int height = Math.max(leftInfo.height, rightInfo.height) + 1;
-        if (leftInfo.isBalance && rightInfo.isBalance
-                && Math.abs(leftInfo.height - rightInfo.height) <= 1) {
-            isBalance = true;
-        }
-        return new Info(height, isBalance);
-
+        return process(head).isBalance;
     }
 
-    private static PrintBinaryTree.Node generateNodeTree(Integer height) {
-        if (height < 1) {
+
+    private static Info process(PrintBinaryTree.Node node) {
+        if (node == null) {
             return null;
         }
-        int val = (int) (Math.random() * 10);
-        PrintBinaryTree.Node node = new PrintBinaryTree.Node(val);
-        if (Math.random() > 0.3) {
-            node.left = generateNodeTree(height - 1);
+        Info leftInfo = process(node.left);
+        Info rightInfo = process(node.right);
+        boolean isBalance = true;
+        int max = node.value;
+        int min = node.value;
+        if (leftInfo != null && !leftInfo.isBalance) {
+            isBalance = false;
         }
-        if (Math.random() > 0.3) {
-            node.right = generateNodeTree(height - 1);
+        if (rightInfo != null && !rightInfo.isBalance) {
+            isBalance = false;
         }
-        return node;
+        if (leftInfo != null) {
+            max = Math.max(max, leftInfo.max);
+            min = Math.min(min, leftInfo.min);
+        }
+        if (rightInfo != null) {
+            max = Math.max(max, rightInfo.max);
+            min = Math.min(min, rightInfo.min);
+        }
+        if (leftInfo != null && node.value <= leftInfo.max) {
+            isBalance = false;
+        }
+        if (rightInfo != null && node.value >= rightInfo.min) {
+            isBalance = false;
+        }
+        return new Info(isBalance, max, min);
+    }
 
+    /**
+     * 1、子树是否为搜索二叉树
+     * 2、子树最大节点值
+     * 3、子树最小节点值
+     */
+    private static class Info {
+        boolean isBalance;
+        int max;
+        int min;
+
+        public Info(boolean isBalance, int max, int min) {
+            this.isBalance = isBalance;
+            this.max = max;
+            this.min = min;
+        }
     }
 }
