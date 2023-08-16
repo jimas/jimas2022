@@ -1,12 +1,13 @@
 package com.jimas.class17;
 
 /**
- * 返回 最大搜索二叉子树的节点数
- * 在线测试链接 : <a href="https://leetcode.com/problems/largest-bst-subtree">largest-bst-subtree</a>
+ * 返回 最大搜索二叉子树的头节点
+ * 递归套路：
+ * 1、
  *
  * @author liuqj
  */
-public class MaxSubBSTSize {
+public class MaxSubBSTHead {
 
     public static void main(String[] args) {
         PrintBinaryTree.Node head = new PrintBinaryTree.Node(10);
@@ -16,7 +17,8 @@ public class MaxSubBSTSize {
         head.right = new PrintBinaryTree.Node(14);
         head.right.right = new PrintBinaryTree.Node(15);
         head.right.left = new PrintBinaryTree.Node(13);
-        System.out.println(printMaxSubSize(head));
+        PrintBinaryTree.printTree(head);
+        System.out.println(printMaxSubBstHead(head).value);
 
         head.left = new PrintBinaryTree.Node(6);
         head.left.left = new PrintBinaryTree.Node(4);
@@ -24,7 +26,8 @@ public class MaxSubBSTSize {
         head.right = new PrintBinaryTree.Node(14);
         head.right.right = new PrintBinaryTree.Node(15);
         head.right.left = new PrintBinaryTree.Node(16);
-        System.out.println(printMaxSubSize(head));
+        PrintBinaryTree.printTree(head);
+        System.out.println(printMaxSubBstHead(head).value);
 
         head.left = new PrintBinaryTree.Node(6);
         head.left.left = new PrintBinaryTree.Node(14);
@@ -32,14 +35,31 @@ public class MaxSubBSTSize {
         head.right = new PrintBinaryTree.Node(14);
         head.right.right = new PrintBinaryTree.Node(15);
         head.right.left = new PrintBinaryTree.Node(16);
-        System.out.println(printMaxSubSize(head));
+        PrintBinaryTree.printTree(head);
+        System.out.println(printMaxSubBstHead(head).value);
     }
 
-    private static int printMaxSubSize(PrintBinaryTree.Node head) {
+    private static PrintBinaryTree.Node printMaxSubBstHead(PrintBinaryTree.Node head) {
         if (head == null) {
-            return 0;
+            return null;
         }
-        return process(head).maxSubBstSize;
+        return process(head).ansHead;
+    }
+
+    private static class Info {
+        int size;
+        int maxSubBSTSize;
+        int max;
+        int min;
+        PrintBinaryTree.Node ansHead;
+
+        public Info(int size, int maxSubBSTSize, int max, int min, PrintBinaryTree.Node ansHead) {
+            this.size = size;
+            this.maxSubBSTSize = maxSubBSTSize;
+            this.max = max;
+            this.min = min;
+            this.ansHead = ansHead;
+        }
     }
 
     private static Info process(PrintBinaryTree.Node x) {
@@ -54,59 +74,35 @@ public class MaxSubBSTSize {
         int p1 = -1;
         int p2 = -1;
         int p3 = -1;
-        //
+        PrintBinaryTree.Node ansHead = null;
         if (leftInfo != null) {
+            size += leftInfo.size;
             max = Math.max(max, leftInfo.max);
             min = Math.min(min, leftInfo.min);
-            size += leftInfo.size;
-            p1 = leftInfo.maxSubBstSize;
+            p1 = leftInfo.maxSubBSTSize;
+            ansHead = leftInfo.ansHead;
         }
         if (rightInfo != null) {
+            size += rightInfo.size;
             max = Math.max(max, rightInfo.max);
             min = Math.min(min, rightInfo.min);
-            size += rightInfo.size;
-            p2 = rightInfo.maxSubBstSize;
+            p2 = rightInfo.maxSubBSTSize;
+            if (p2 > p1) {
+                ansHead = rightInfo.ansHead;
+            }
         }
-        boolean leftBst = leftInfo == null || (leftInfo.maxSubBstSize == leftInfo.size);
-        boolean rightBst = rightInfo == null || (rightInfo.maxSubBstSize == rightInfo.size);
-        if (leftBst && rightBst) {
-            boolean leftMaxLessX = leftInfo == null || (leftInfo.max < x.value);
-            boolean rightMinMoreX = rightInfo == null || (rightInfo.min > x.value);
+        boolean leftBST = leftInfo == null || leftInfo.size == leftInfo.maxSubBSTSize;
+        boolean rightBST = rightInfo == null || rightInfo.size == rightInfo.maxSubBSTSize;
+        if (leftBST && rightBST) {
+            boolean leftMaxLessX = leftInfo == null || leftInfo.max < x.value;
+            boolean rightMinMoreX = rightInfo == null || rightInfo.min > x.value;
             if (leftMaxLessX && rightMinMoreX) {
                 int leftSize = leftInfo == null ? 0 : leftInfo.size;
                 int rightSize = rightInfo == null ? 0 : rightInfo.size;
                 p3 = leftSize + rightSize + 1;
+                ansHead = x;
             }
         }
-        return new Info(size, Math.max(Math.max(p1, p2), p3), max, min);
-    }
-
-    /**
-     * size == maxSubBstSize 就表明 是二叉搜索树
-     */
-    private static class Info {
-        /**
-         * 子树节点数
-         */
-        int size;
-        /**
-         * 最大子树二叉搜索树节点
-         */
-        int maxSubBstSize;
-        /**
-         * 子树最大节点值
-         */
-        int max;
-        /**
-         * 子树最小节点值
-         */
-        int min;
-
-        public Info(int size, int maxSubBstSize, int max, int min) {
-            this.size = size;
-            this.maxSubBstSize = maxSubBstSize;
-            this.max = max;
-            this.min = min;
-        }
+        return new Info(size, Math.max(p1, Math.max(p2, p3)), max, min, ansHead);
     }
 }
