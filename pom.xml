@@ -33,6 +33,7 @@
         <module>log-parent</module>
         <module>jimas-hadoop</module>
         <module>spring-web</module>
+        <module>jimas-rocksdb</module>
     </modules>
     <dependencyManagement>
         <dependencies>
