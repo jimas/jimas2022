@@ -64,7 +64,15 @@ public class Config {
     public void batchWriteTest() throws RocksDBException {
         try (WriteOptions writeOpts = new WriteOptions().setSync(false); WriteBatch updates = new WriteBatch()) {
             for (int i = 0; i < 100; i++) {
-                updates.put((i + "11").getBytes(StandardCharsets.UTF_8), JSON.toJSONBytes(new Info(i, "你好" + i)));
+                updates.put(("11" + i).getBytes(StandardCharsets.UTF_8), JSON.toJSONBytes(new Info(i, "你好" + i)));
+            }
+            db.write(writeOpts, updates);
+            for (int i = 0; i < 100; i++) {
+                updates.put(("22" + i).getBytes(StandardCharsets.UTF_8), JSON.toJSONBytes(new Info(i, "你好" + i)));
+            }
+            db.write(writeOpts, updates);
+            for (int i = 0; i < 100; i++) {
+                updates.put(("33" + i).getBytes(StandardCharsets.UTF_8), JSON.toJSONBytes(new Info(i, "你好" + i)));
             }
             db.write(writeOpts, updates);
         }
@@ -91,7 +99,7 @@ public class Config {
     @Test
     public void multiGetTest() throws RocksDBException {
         List<byte[]> bytes = db.multiGetAsList(Arrays.asList(
-                "1011".getBytes(StandardCharsets.UTF_8)
+                "1110".getBytes(StandardCharsets.UTF_8)
                 , "1111".getBytes(StandardCharsets.UTF_8)
                 , "ss".getBytes(StandardCharsets.UTF_8)));
 
@@ -102,6 +110,55 @@ public class Config {
             }
         }
 
+    }
+
+    /**
+     * 前缀搜索
+     */
+    @Test
+    public void testSeekIterator() {
+        try (ReadOptions readOptions = new ReadOptions().setPrefixSameAsStart(true); RocksIterator rocksIterator = db.newIterator(readOptions)) {
+            rocksIterator.seekToFirst();
+            rocksIterator.seek("11".getBytes(StandardCharsets.UTF_8));
+            while (rocksIterator.isValid() && new String(rocksIterator.key(), StandardCharsets.UTF_8).startsWith("11")) {
+                byte[] key = rocksIterator.key();
+                System.out.println(new String(key, StandardCharsets.UTF_8));
+                System.out.println(new String(rocksIterator.value(), StandardCharsets.UTF_8));
+                rocksIterator.next();
+            }
+
+
+        }
+    }
+
+    @Test
+    public void testSeekForPrevIterator() {
+        try (ReadOptions readOptions = new ReadOptions().setPrefixSameAsStart(true); RocksIterator rocksIterator = db.newIterator(readOptions)) {
+            rocksIterator.seekToFirst();
+            rocksIterator.seekForPrev("11".getBytes(StandardCharsets.UTF_8));
+            while (rocksIterator.isValid() && new String(rocksIterator.key(), StandardCharsets.UTF_8).startsWith("11")) {
+                byte[] key = rocksIterator.key();
+                System.out.println(new String(key, StandardCharsets.UTF_8));
+                System.out.println(new String(rocksIterator.value(), StandardCharsets.UTF_8));
+                //next 会穿过上限，走到不同的前缀去
+                rocksIterator.next();
+            }
+        }
+    }
+
+    @Test
+    public void testMerge() throws RocksDBException {
+        MergeOperator mergeOperator = new MergeOperator(2L) {
+            @Override
+            protected void disposeInternal(long handle) {
+
+            }
+        };
+        db.merge("jimas".getBytes(StandardCharsets.UTF_8), "merge".getBytes(StandardCharsets.UTF_8));
+        db.merge("jimas".getBytes(StandardCharsets.UTF_8), "merge2".getBytes(StandardCharsets.UTF_8));
+
+        byte[] bytes = db.get("jimas".getBytes(StandardCharsets.UTF_8));
+        System.out.println(new String(bytes, StandardCharsets.UTF_8));
     }
 
 }

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -42,7 +43,7 @@ public class BaseOnStreamMq implements MsgQueue, StreamListener<String, Record<S
         final RedisSerializer<String> stringSerializer = redisTemplate.getStringSerializer();
         hashMap.put(stringSerializer.serialize(MESSAGE_KEY), stringSerializer.serialize(message));
         final ByteRecord byteRecord = StreamRecords.rawBytes(hashMap)
-                .withStreamKey(stringSerializer.serialize(topic))
+                .withStreamKey(Objects.requireNonNull(stringSerializer.serialize(topic)))
                 .withId(RecordId.autoGenerate());
         redisTemplate.execute((RedisCallback) connection ->
                 connection.xAdd(byteRecord, RedisStreamCommands.XAddOptions.maxlen(MAX_LEN))
@@ -64,7 +65,7 @@ public class BaseOnStreamMq implements MsgQueue, StreamListener<String, Record<S
      * 消息必须正确处理，自动 ack
      * 不能抛出异常，否则会导致消费者被移除 那是因为抛出异常是 默认 当前长轮询现场 被取消
      * @see org.springframework.data.redis.stream.StreamPollTask#doLoop()
-     * @param message
+     * @param message 消息
      */
     @Override
     public void onMessage(Record<String, Map<String, String>> message) {
