@@ -122,7 +122,7 @@ public class MyProxy {
         byte[] bodyBytes = MyPackageUtil.objToBytes(myContext);
         MyHeader myHeader = MyPackageUtil.createHeader(bodyBytes);
         byte[] headBytes = MyPackageUtil.objToBytes(myHeader);
-//                System.out.println("client:head size:" + headBytes.length);
+        System.out.println("client:head size:" + headBytes.length);
 
         NioSocketChannel client = ClientFactory.getInstance().getClient(new InetSocketAddress(HOST, PORT), 1);
         ResponseMappingCallback.addCallback(myHeader.getRequestId(), res);
@@ -131,4 +131,5 @@ public class MyProxy {
         msg.writeBytes(bodyBytes);
         client.writeAndFlush(msg);
     }
+
 }

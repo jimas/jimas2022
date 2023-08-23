@@ -1,7 +1,6 @@
 package com.jimas.rpc.test;
 
-import com.jimas.rpc.MyProxy;
-import com.jimas.rpc.MyServer;
+import com.jimas.rpc.*;
 import com.jimas.rpc.service.Fly;
 import org.eclipse.jetty.server.Server;
 import org.junit.Test;
@@ -15,6 +14,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MyMainTest {
     static AtomicInteger sand = new AtomicInteger(0);
 
+    /**
+     * header size：95
+     */
+    @Test
+    public void testHeadSize() {
+        MyContext myContext = new MyContext();
+        byte[] bodyBytes = MyPackageUtil.objToBytes(myContext);
+        MyHeader myHeader = MyPackageUtil.createHeader(bodyBytes);
+        byte[] headBytes = MyPackageUtil.objToBytes(myHeader);
+        System.out.println("client:head size:" + headBytes.length);
+    }
+
     @Test
     public void jettyServer() {
         Server server = new Server();
@@ -24,12 +35,13 @@ public class MyMainTest {
             e.printStackTrace();
         }
     }
-//inet 192.168.64.135  netmask 255.255.255.0  broadcast 192.168.64.255
+
+    //inet 192.168.64.135  netmask 255.255.255.0  broadcast 192.168.64.255
     @Test
     public void testServer() {
         try {
-            MyServer.startHttpServer();
-//            MyServer.startNettyServer();
+//            MyServer.startHttpServer();
+            MyServer.startNettyServer();
         } catch (Exception e) {
             e.printStackTrace();
         }

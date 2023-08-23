@@ -34,6 +34,7 @@ public class MyRpcServerHandler extends ChannelInboundHandlerAdapter {
             byte[] bodyBytes = MyPackageUtil.objToBytes(myResBody);
             MyHeader myResHeader = MyPackageUtil.createHeader(bodyBytes, myPackage.getMyHeader().getRequestId());
             byte[] myResHeadBytes = MyPackageUtil.objToBytes(myResHeader);
+            System.out.println("header size:" + myResHeadBytes.length);
             ByteBuf buf = UnpooledByteBufAllocator.DEFAULT.directBuffer(myResHeadBytes.length + bodyBytes.length);
             buf.writeBytes(myResHeadBytes);
             buf.writeBytes(bodyBytes);

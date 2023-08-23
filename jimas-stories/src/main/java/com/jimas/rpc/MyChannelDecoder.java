@@ -11,12 +11,13 @@ import java.util.List;
  * 可以用 flag 区分
  * Date: 2022/8/18
  * Time: 23:31
- *
+ * invalid stream header: 504F5354
  * @author com.jimas
  */
 public class MyChannelDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf buf, List<Object> list) throws Exception {
+        //95 是header的大小
         while (buf.readableBytes() >= 95) {
             byte[] bytes = new byte[95];
             buf.getBytes(buf.readerIndex(), bytes);
