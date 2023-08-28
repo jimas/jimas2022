@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class OrderFeignFallback implements OrderFeign {
     @Override
     public OrderDTO findByNo(String orderNo) {
+        log.warn("=====OrderFeignFallback=====");
         return new OrderDTO();
     }
 }

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: spring-zookeeper
+  profiles:
+    active: dev
+  zookeeper:
+    address: localhost:2181
+server:
+  port: 9090

@@ -1,0 +1,8 @@
+### node9090
+POST http://localhost:9090/sms/send
+
+### node9091
+POST http://localhost:9091/sms/send
+
+### node9092
+POST http://localhost:9092/sms/send
