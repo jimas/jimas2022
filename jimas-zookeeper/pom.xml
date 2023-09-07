@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>jimas-zookeeper</artifactId>
-    <name>Archetype - jimas-zookeeper</name>
+    <name>jimas-zookeeper</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>
@@ -58,6 +58,11 @@
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-recipes</artifactId>
             <version>4.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

@@ -35,6 +35,7 @@
         <module>spring-web</module>
         <module>jimas-rocksdb</module>
         <module>jimas-zookeeper</module>
+        <module>jimas-rpc</module>
     </modules>
     <dependencyManagement>
         <dependencies>

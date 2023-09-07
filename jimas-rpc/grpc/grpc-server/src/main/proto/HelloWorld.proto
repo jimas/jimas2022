@@ -1,0 +1,25 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "com.jimas.grpc.common.helloworld";
+//request
+message Request{
+  double num1 = 1;
+  double num2 = 2;
+  OperateType opType = 3;
+
+}
+//操作类型
+enum OperateType {
+  Addition = 0;
+  Division = 1;
+  Multi = 2;
+  Sub = 3;
+}
+//response
+message Response{
+  double result = 1;
+}
+//定义服务
+service Operate{
+  rpc calculate(Request) returns (Response);
+}
