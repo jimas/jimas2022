@@ -12,4 +12,10 @@ public interface ResponseOrBuilder extends
    * @return The result.
    */
   double getResult();
+
+  /**
+   * <code>int32 responsePort = 2;</code>
+   * @return The responsePort.
+   */
+  int getResponsePort();
 }

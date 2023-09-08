@@ -1,5 +1,11 @@
 server:
   port: 5010
+spring:
+  application:
+    name: grpc-server
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
 grpc:
   server:
     port: 5015

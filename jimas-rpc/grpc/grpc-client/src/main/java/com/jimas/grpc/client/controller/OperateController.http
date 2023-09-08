@@ -1,3 +1,5 @@
+GET http://localhost:5020/grpc/listUrl
+###
 POST http://localhost:5020/grpc/operate2
 Content-Type: application/json
 

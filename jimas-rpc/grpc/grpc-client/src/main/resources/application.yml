@@ -4,7 +4,8 @@ server:
 grpc:
   client:
     grpc-operate-service:
-      address: 'static://127.0.0.1:5015'
+      address: discovery:/grpc-server
+#      address: 'static://127.0.0.1:5015'
       negotiation-type: plaintext
   server:
     url: localhost:5015

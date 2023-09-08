@@ -3,6 +3,7 @@ package com.jimas.grpc.client.service;
 import com.jimas.grpc.common.helloworld.OperateGrpc;
 import com.jimas.grpc.common.helloworld.OperateType;
 import com.jimas.grpc.common.helloworld.Request;
+import com.jimas.grpc.common.helloworld.Response;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.springframework.beans.factory.DisposableBean;
@@ -28,10 +29,12 @@ public class CalculateService implements InitializingBean, DisposableBean {
         this.blockingStub = OperateGrpc.newBlockingStub(channel);
     }
 
-    public Double operate(Double num1, Double num2, OperateType operateType) {
+    public String operate(Double num1, Double num2, OperateType operateType) {
         Request request = Request.newBuilder().setNum1(num1).setNum2(num2).setOpType(operateType).build();
-        return blockingStub.calculate(request).getResult();
+        Response response = blockingStub.calculate(request);
+        return String.format("port:%d,result:%f", response.getResponsePort(), response.getResult());
     }
+
     @Override
     public void destroy() throws Exception {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);

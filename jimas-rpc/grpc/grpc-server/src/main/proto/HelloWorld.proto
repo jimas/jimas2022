@@ -18,6 +18,7 @@ enum OperateType {
 //response
 message Response{
   double result = 1;
+  int32 responsePort = 2;
 }
 //定义服务
 service Operate{

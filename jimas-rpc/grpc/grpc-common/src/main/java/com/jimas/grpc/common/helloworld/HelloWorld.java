@@ -3,6 +3,9 @@
 
 package com.jimas.grpc.common.helloworld;
 
+/**
+ * @author liuqj
+ */
 public final class HelloWorld {
   private HelloWorld() {}
   public static void registerAllExtensions(
@@ -35,11 +38,12 @@ public final class HelloWorld {
     String[] descriptorData = {
       "\n\020HelloWorld.proto\"C\n\007Request\022\014\n\004num1\030\001 " +
       "\001(\001\022\014\n\004num2\030\002 \001(\001\022\034\n\006opType\030\003 \001(\0162\014.Oper" +
-      "ateType\"\032\n\010Response\022\016\n\006result\030\001 \001(\001*=\n\013O" +
-      "perateType\022\014\n\010Addition\020\000\022\014\n\010Division\020\001\022\t" +
-      "\n\005Multi\020\002\022\007\n\003Sub\020\0032+\n\007Operate\022 \n\tcalcula" +
-      "te\022\010.Request\032\t.ResponseB$\n com.jimas.grp" +
-      "c.common.helloworldP\001b\006proto3"
+      "ateType\"0\n\010Response\022\016\n\006result\030\001 \001(\001\022\024\n\014r" +
+      "esponsePort\030\002 \001(\005*=\n\013OperateType\022\014\n\010Addi" +
+      "tion\020\000\022\014\n\010Division\020\001\022\t\n\005Multi\020\002\022\007\n\003Sub\020\003" +
+      "2+\n\007Operate\022 \n\tcalculate\022\010.Request\032\t.Res" +
+      "ponseB$\n com.jimas.grpc.common.helloworl" +
+      "dP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -56,7 +60,7 @@ public final class HelloWorld {
     internal_static_Response_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Response_descriptor,
-        new String[] { "Result", });
+        new String[] { "Result", "ResponsePort", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
