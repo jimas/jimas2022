@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * 并查集
- *
+ * 每个节点起始都指向自己（自己是自己的父）
  * @author liuqj
  */
 public class UnionFind<V> {

@@ -23,5 +23,6 @@ public class OperateImpl extends OperateGrpc.OperateImplBase {
                 .setResponsePort(port).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
+        System.out.println(Thread.currentThread().getName());
     }
 }

@@ -1,6 +1,5 @@
 package com.jimas.grpc.client.controller;
 
-import com.jimas.grpc.client.service.CalculateService;
 import com.jimas.grpc.common.helloworld.OperateGrpc;
 import com.jimas.grpc.common.helloworld.OperateType;
 import com.jimas.grpc.common.helloworld.Request;
@@ -22,8 +21,6 @@ import java.util.List;
 @RestController
 @RequestMapping("grpc/")
 public class OperateController {
-    @Resource
-    private CalculateService calculateService;
     /**
      * 要与配置文件一致
      * grpc.client.grpc-operate-service.address = 'static://127.0.0.1:5015'
@@ -46,11 +43,6 @@ public class OperateController {
 
     @PostMapping("operate")
     public String operate() {
-        return calculateService.operate(10D, 20D, OperateType.Addition);
-    }
-
-    @PostMapping("operate2")
-    public String operate2() {
         Request request = Request.newBuilder().setNum1(10D).setNum2(20D).setOpType(OperateType.Addition).build();
         Response response = operateBlockingStub.calculate(request);
         return String.format("port:%d,result:%f", response.getResponsePort(), response.getResult());

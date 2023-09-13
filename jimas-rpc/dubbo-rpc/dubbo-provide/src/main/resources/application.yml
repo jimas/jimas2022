@@ -1,0 +1,12 @@
+dubbo:
+  application:
+    name: dubbo-demo-provide
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: zookeeper://localhost:2181
+  provider:
+    group: dev
+server:
+  port: 3030

@@ -1,0 +1,18 @@
+POST http://localhost:3040/demo/say
+Content-Type: application/x-www-form-urlencoded
+
+name=颤三
+
+###
+POST http://localhost:3040/demo/say-v2
+Content-Type: application/x-www-form-urlencoded
+
+name=颤三
+
+###
+POST http://localhost:3040/demo/say-all
+Content-Type: application/x-www-form-urlencoded
+
+name=颤三
+
+###

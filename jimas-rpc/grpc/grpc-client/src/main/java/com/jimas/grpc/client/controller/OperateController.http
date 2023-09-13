@@ -1,24 +1,6 @@
 GET http://localhost:5020/grpc/listUrl
 ###
-POST http://localhost:5020/grpc/operate2
-Content-Type: application/json
-
-{}
-
-###
 POST http://localhost:5020/grpc/operate
-Content-Type: application/json
-
-{}
-
-###
-POST http://localhost:5020/grpc/operate
-Content-Type: application/json
-
-{}
-
-###
-POST http://localhost:5020/grpc/operate2
 Content-Type: application/json
 
 {}
@@ -42,13 +24,31 @@ Content-Type: application/json
 {}
 
 ###
-POST http://localhost:5020/grpc/operate2
+POST http://localhost:5020/grpc/operate
 Content-Type: application/json
 
 {}
 
 ###
-POST http://localhost:5020/grpc/operate2
+POST http://localhost:5020/grpc/operate
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:5020/grpc/operate
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:5020/grpc/operate
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:5020/grpc/operate
 Content-Type: application/json
 
 {}
