@@ -1,6 +1,11 @@
 server:
   port: 5020
-
+spring:
+  application:
+    name: grpc-client
+  cloud:
+    zookeeper:
+      connect-string: localhost:2181
 grpc:
   client:
     grpc-operate-service:

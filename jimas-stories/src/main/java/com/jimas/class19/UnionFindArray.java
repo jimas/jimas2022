@@ -47,8 +47,8 @@ public class UnionFindArray {
         if (f1 == f2) {
             return;
         }
-        int big = size[f1] > size[f2] ? a : b;
-        int small = big == a ? b : a;
+        int big = size[f1] > size[f2] ? f1 : f2;
+        int small = big == f1 ? f2 : f1;
         size[big] = size[f1] + size[f2];
         parents[small] = big;
         sets--;
@@ -64,7 +64,7 @@ public class UnionFindArray {
             help[h++] = curr;
             curr = parents[curr];
         }
-        for (h--; h > 0; h--) {
+        for (h--; h >= 0; h--) {
             parents[help[h]] = curr;
         }
         return curr;
