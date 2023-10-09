@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: jimas-clickhouse
+  profiles:
+    active: dev
+  datasource:
+    druid:
+      clickhouse:
+        url: jdbc:clickhouse://node02:8123,node03:8123,node06:8123/default
+        username:
+        password:
+        min-idle: 5
+        initial-size: 5
+
+
